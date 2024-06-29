@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { ThemeProvider, createTheme, fontFamily, fontSize, fontWeight, grid, palette, textTransform } from '@mui/system';
-import { InsertEmoticon } from '@mui/icons-material';
 import Grid from '../Grid';
 import './styles.css';
 import List from '../List';
+import Button from '../../Common/Button';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
 
-
-
-export default function TabsComponent({coins}) {
+function TabsComponent({coins}) {
   const [value, setValue] = useState('grid');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#3a80e9",
+      },
+    },
+  });
 
   const style = {
     color: "var(--white)",
@@ -27,19 +32,11 @@ export default function TabsComponent({coins}) {
     fontFamily: "Inter",
     textTransform: "capitalize",
   };
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "ff0000",
-      },
-    },
-  });
    
   return (
-     <ThemeProvider>
-    {/* // <ThemeProvider theme={theme}> */}
-      <TabContext value={value}>
+   <Box>
+     <ThemeProvider theme={theme}>
+        <TabContext value={value}>
           <TabList onChange={handleChange} variant="fullWidth">
             <Tab label="Grid" value="grid" sx={style} />
             <Tab label="List" value="list" sx={style} />
@@ -48,10 +45,8 @@ export default function TabsComponent({coins}) {
           <div className='grid-flex'>
             {coins.map((coin, i) => {
               return <Grid coin={coin} key={i}/>;
-             
             })}
           </div>
-        
         </TabPanel>
         <TabPanel value="list">
        <table className='list-table'>
@@ -63,6 +58,14 @@ export default function TabsComponent({coins}) {
          </table>
         </TabPanel>
       </TabContext>
-    </ThemeProvider>
+      </ThemeProvider>
+      </Box>
   );
 }
+
+export default TabsComponent;
+
+
+
+
+

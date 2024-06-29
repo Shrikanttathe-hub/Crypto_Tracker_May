@@ -1,15 +1,21 @@
 import axios from "axios";
+import { API_URL } from "../consonants";
 
 export const get100Coins = () => {
-    const myCoins = axios
-    .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+    const myCoins = axios.get(
+      `${API_URL}/markets?vs_currency=usd&order=market_cap_desc`
+    )
     .then((response) => {
-      console.log("Response>>>", response);
-      return response.data;
+      if (response.status == 200) {
+        console.log("coinsData", response);
+        return response.data;
+      }
     })
     .catch((error) => {
-      console.log("Error>>>", error);
+      console.log("ERROR>>>", error);
     });
 
-    return myCoins;
+  if (myCoins) return myCoins;
+  else return;
 };
+   

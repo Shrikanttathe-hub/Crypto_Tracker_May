@@ -1,10 +1,11 @@
 import React from 'react'
 import "./styles.css";
 import { color } from '@mui/system';
-import Button1 from '../../Common/Button1';
 import iphone from "../../../assets/iphone.png";
 import gradient from "../../../assets/gradient.png";
 import {motion} from "framer-motion";
+import Button from '../../Common/Button';
+import { Link } from 'react-router-dom';
 
 function MainComponent() {
   return (
@@ -36,8 +37,12 @@ function MainComponent() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 1.5 }}
           > 
-        <Button1 text={"Dashboard"}/>
-        <Button1 text={"Share"} outlined={true}/>
+        <Link to='/Dashboard'>
+        <Button text= {"Dashboard"}
+         onClick={() => console.log("Btn Clicked")}
+       />
+       </Link>
+        <Button text={"Share"} outlined={true}/>
         </motion.div>
         </div>
 

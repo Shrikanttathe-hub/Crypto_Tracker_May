@@ -1,6 +1,6 @@
 .grid-container{
-   width: 320px;
-   height: 320px;
+   width: 300px;
+   /* height: 320px; */
    background-color: var(--darkgrey);
    border: 2px solid var(--darkgrey);
    border-radius: 0.75rem;
@@ -40,15 +40,15 @@
     text-transform: uppercase;
     font-weight: 600;
     font-size: 1.2rem;
-    margin-top: 0;
+    margin: 0;
 }
 
-.coin.name{
+.coin-name{
     color: var(--grey);
     text-transform: capitalize;
     font-weight: light;
     font-size: 1rem;
-    margin-top: 0;
+    margin: 0;
 }
 
 .chip-flex{
@@ -78,7 +78,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 121rem;
+    font-size: 1.1rem;
     color: var(--green);
 }
 .price-chip:hover, .icon-chip:hover{
@@ -90,8 +90,8 @@
 .icon-chip{
     border: 2px solid var(--green);
     border-radius: 50%;
-    height: 2rem;
-    width: 2rem;
+    height: 2rem !important ;
+    width: 2rem !important;
     display: flex;
     justify-content: center;
     align-items: center;

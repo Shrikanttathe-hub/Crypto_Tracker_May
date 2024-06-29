@@ -3,6 +3,7 @@
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
+    background-color: var(--darkgrey);
     align-items: center;
     justify-content: center;
     width: 3rem;
@@ -11,4 +12,13 @@
     border-radius: 50%;
     margin: 1.2rem;
     cursor: pointer;
+    z-index: 100;
+    display: none;
+    color: var(--blue);
+}
+
+.back-top-top-btn:hover{
+    background-color: var(--blue);
+    color: var(--darkgrey) !important;
+    transition: all 0.3s;
 }

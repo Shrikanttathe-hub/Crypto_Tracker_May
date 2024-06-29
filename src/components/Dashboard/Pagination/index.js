@@ -1,9 +1,8 @@
 import  React, { useState } from 'react';
 import './styles.css';
-import pagination from '@mui/material/Pagination';
 import Pagination from '@mui/material/Pagination';
 
-export default function PaginationComponent( {page, handlePageChange}) {
+function PaginationComponent( {page, handlePageChange}) {
 //   const [page, setPage] = useState(1);
 //   const handleChange = (event, value) => {
 //     setPage(value);
@@ -18,7 +17,7 @@ export default function PaginationComponent( {page, handlePageChange}) {
       sx={{
         color: "var(--white)",
         "& .Mui-selected ": {
-        backgroundColor: "var(--blue)",
+        backgroundColor: "var(--blue) !important",
         color:"#fff !important",    
         barderColor: "var(--blue) !important",
         },
@@ -34,3 +33,5 @@ export default function PaginationComponent( {page, handlePageChange}) {
       </div>
   );
 }
+
+export default PaginationComponent;

@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <div>
       <Header/>
-      <MainComponent/>
+      <MainComponent />
     </div>
   )
 }

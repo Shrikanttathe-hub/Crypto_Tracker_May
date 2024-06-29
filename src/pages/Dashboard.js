@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Common/Header';
 import TabsComponent from '../components/Dashboard/Tabs';
-import axios from 'axios';
 import Search from '../components/Dashboard/Search';
 import PaginationComponent from '../components/Dashboard/Pagination';
 import Loader from '../components/Common/Loader';
@@ -15,7 +14,7 @@ const [coins, setCoins] = useState([]);
 const [paginatdCoins, setPaginatedCoins] = useState([]);
 const [search, setSearch] = useState("");
 const [page, setPage] = useState(1);
-const [isLoading, setIsLoading] = useState(true);
+const [isLoading, setIsLoading] = useState(false);
 
 const handlePageChange = (event, value) => {
   setPage(value);
@@ -25,26 +24,31 @@ const handlePageChange = (event, value) => {
 
 const onSearchChange = (e) => {
    setSearch(e.target.value);
-}
+};
 
-var filteredCoins = coins.filter((item) => 
+const filteredCoins = coins.filter((item) => {
+  if(
   item.name.toLowerCase().includes(search.toLowerCase()) ||
- item.symbol.toLowerCase().includes(search.toLowerCase())
-);
+  item.symbol.toLowerCase().includes(search.toLowerCase())
+){
+  return item;
+}
+});
 
 useEffect(() => {
  getData();
 
 },[]);
 
-const getData = async () => {
+ const getData = async () => {
+  setIsLoading(true);
   const myCoins = await get100Coins();
-  if (myCoins){
+  if (myCoins) {
     setCoins(myCoins);
     setPaginatedCoins(myCoins.slice(0, 10));
     setIsLoading(false);
   }
-}
+};
 
   return (
      <>
@@ -54,7 +58,7 @@ const getData = async () => {
         <Loader />
       ) : (
       <div>  
-      <Search search={search} onSearchChange={onSearchChange}/>
+      <Search search={search} onSearchChange={onSearchChange} />
       <TabsComponent coins={search ? filteredCoins : paginatdCoins}/>
       {!search && (
          <PaginationComponent 
@@ -62,13 +66,12 @@ const getData = async () => {
          handlePageChange={handlePageChange}/>
       )} 
     </div>
-  )}
+   )}
  </>
   );
 }
 
 export default DashboardPage;
-
 
 
 

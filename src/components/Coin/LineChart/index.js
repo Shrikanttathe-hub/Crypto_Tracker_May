@@ -1,97 +1,60 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
-import { convertNumber } from '../../../functions/ConvertNumber';
-import { CategoryScale, Chart, plugins, LinearScale, PointElement, LineElement  } from 'chart.js'; 
- 
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement); 
-function LineChart({ chartData, priceType, multiAxis }) {
-  const options = {
-    plugins: {
+ import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto'; // Dont get rid of this 
+import { convertNumbers } from '../../../functions/ConvertNumber';
+
+ //Chart.register(CategoryScale, LinearScale, PointElement, LineElement); 
+ function LineChart({ chartData, priceType, multiAxis }) {
+   const options = {
+     plugins: {
       legend: {
         display: multiAxis ? true : false,
       },
     },
     responsive: true,
     interaction: {
-      mode: 'index',
-      intersect: false,
+    mode: 'index',
+    intersect: false,
     },
     scales: {
-      y: {
-        // type: 'linear', 
+      crypto1: {
+        type: 'linear',
+        display: true,
+        position: 'left',
         ticks: {
-          callback: function (value, index, ticks) {
-            if (priceType === 'prices') return '$' + value.toLocaleString();
-            else {
-              return '$' + convertNumber(value);
+          // include a dollar sign in the ticks
+           callback: function (value) {
+           if (priceType === "total_volumes") {
+            return convertNumbers(value);
+           } else if (priceType == "market_caps") {
+            return "$" + convertNumbers(value);
+           } else {
+            return '$' + value.toLocaleString();
             }
           },
         },
       },
-      x:{
-        type:"category",
-      }
+      crypto2: multiAxis && {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        ticks: {
+          // include a dollar sign in the ticks
+           callback: function (value) {
+           if (priceType === "total_volumes") {
+            return convertNumbers(value);
+           } else if (priceType == "market_caps") {
+            return "$" + convertNumbers(value);
+           } else {
+            return '$' + value.toLocaleString();
+            }
+          },
+        },
+      },
     },
-  };
- 
+   };
+
   return <Line data={chartData} options={options} />;
 }
  
 export default LineChart;
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import { Legend, plugins } from 'chart.js';
-// import { display } from '@mui/system';
-// import { Line } from 'react-chartjs-2';
-// import {chartData} from './' 
-// import { convertNumber } from '../../../functions/ConvertNumber';
-// import { CategoryScale, Chart } from 'chart.js';
-// Chart.register(CategoryScale)
-
-// function LineChart({chartData, priceType, multiAxis}) {
-// const options = {
-//     plugins: {
-//       legend: {
-//         display: multiAxis ? true : false,
-//       },
-//     },
-//     responsive: true,
-//     interaction: {
-//         mode: "index",
-//         intersect: false,
-//     },
-//     scales: {
-//       y: {
-//           ticks: {
-//               // Include a dollar sign in the ticks
-//               callback: function(value, index, ticks) {
-//                 if (priceType == "prices") return "$" + value.toLocaleString();
-//                 else{
-//                   return "$" + convertNumber(value);
-//                 }
-//                   return '$' + value.toLocaleString();
-//               },
-//           },
-//       },
-//   },
-// };
-
-//   return <Line data={chartData} options={options} />;
-// }
-
-// export default LineChart;

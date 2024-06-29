@@ -1,4 +1,4 @@
-export const convertNumber = (number) => {
+export const convertNumbers = (number) => {
     const numberWithCommas = number.toLocaleString();
     var arr = numberWithCommas.split(",");
 
@@ -17,12 +17,42 @@ export const convertNumber = (number) => {
         // thousands
         return arr[0] + "." + arr[1].slice(0,2) + "K";
     }else{
-        // Humdreds
+        // Hundreds
         return number.toLocaleString();
     }
 };
 
 
-// 1,001,000 billion
-// ["1" , "000"] K 
-// arr.length = 2
+// another approach
+// export const convertNumbers = (number) => {
+//     if (number) {
+//       if (number < 1000) {
+//         return number;
+//       } else if (number >= 1000 && number < 1000000) {
+//         return (
+//           number.toString().slice(0, -3) +
+//           "." +
+//           number.toString().slice(-3, -1) +
+//           "K"
+//         );
+//       } else if (number >= 1000000 && number < 1000000000) {
+//         return (
+//           number.toString().slice(0, -6) +
+//           "." +
+//           number.toString().slice(-6, -4) +
+//           "M"
+//         );
+//       } else if (number >= 1000000000) {
+//         return (
+//           number.toString().slice(0, -9) +
+//           "." +
+//           number.toString().slice(-9, -7) +
+//           "B"
+//         );
+//       }
+//     }
+//   };
+
+// // 1,001,000 billion
+// // ["1" , "000"] K 
+// // arr.length = 2
